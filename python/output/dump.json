@@ -1,0 +1,8 @@
+{
+  "isEnabled": true,
+  "isDumpDex": true,
+  "isDumpCode": true,
+  "isDumpCodeByClassList": false,
+  "classList": [],
+  "delaySeconds": 0
+}
