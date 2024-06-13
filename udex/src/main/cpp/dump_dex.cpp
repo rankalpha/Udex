@@ -84,12 +84,12 @@ jobject dumpDexBuffListByCookie(JNIEnv *env, jclass clazz, jlongArray cookie) {
 void save_dex_file(std::string dumpDir, const DexFile * dex_file) {
     char dumpdex_path[100] = {0};
     sprintf(dumpdex_path, (dumpDir + "/%p.dex").c_str(), dex_file->begin_);
-    LOGV("dumpdex_path = %s", dumpdex_path);
 
     std::string dex_filepath(dumpdex_path);
     if (dex_fd_maps.find(dex_filepath) != dex_fd_maps.end()) {
         return ;
     }
+    LOGV("dumpdex_path = %s", dumpdex_path);
 
     int dumpdex_fd = open(dumpdex_path, O_CREAT | O_RDWR, 0644);
     if (dumpdex_fd < 0) {

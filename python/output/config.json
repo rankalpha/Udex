@@ -1,15 +1,12 @@
 {
   "targets": [
     {
-      "app_name": "com.ct.client",
+      "app_name": "com.xiyou.english",
       "enabled": true,
       "start_up_delay_ms": 10000,
       "injected_libraries": [
         {
-          "path": "/data/data/com.ct.client/plugin/libdobby.so"
-        },
-        {
-          "path": "/data/data/com.ct.client/plugin/libplugin.so"
+          "path": "/data/data/com.xiyou.english/plugin/libplugin.so"
         }
       ]
     }

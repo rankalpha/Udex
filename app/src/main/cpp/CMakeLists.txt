@@ -25,14 +25,16 @@ project("plugin")
 # for GameActivity/NativeActivity derived applications, the same library name must be
 # used in the AndroidManifest.xml file.
 
-# 这里指定静态链接，生成一个so;默认为 ON，生成两个so
-set(GENERATE_SHARED OFF)
-set(DOBBY_DEBUG OFF)
-set(DOBBY_GENERATE_SHARED OFF)
+if(${CMAKE_ANDROID_ARCH_ABI} STREQUAL "arm64-v8a" OR ${CMAKE_ANDROID_ARCH_ABI} STREQUAL "x86_64")
+    set(MODULE_SUFFIX "64")
+else()
+    set(MODULE_SUFFIX "32")
+endif()
 
-# 指定 dobby 库目录
-set(DOBBY_SOURCE_DIR Dobby)
-add_subdirectory(${DOBBY_SOURCE_DIR} dobby.build)
+add_library(Dobby STATIC IMPORTED)
+set_target_properties(Dobby PROPERTIES IMPORTED_LOCATION
+        ${CMAKE_CURRENT_SOURCE_DIR}/Dobby/${CMAKE_ANDROID_ARCH_ABI}/libdobby.a)
+
 
 add_library(${CMAKE_PROJECT_NAME} SHARED
         # List C/C++ source files with relative paths to this CMakeLists.txt.
@@ -54,7 +56,5 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
         # List libraries link to the target library
         android
         log
-        -Wl,-Bstatic
-        dobby_static
-
+        Dobby
 )

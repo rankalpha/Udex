@@ -35,9 +35,9 @@ def create_frida_config(package_name):
             "enabled": True,
             "start_up_delay_ms": 10000,
             "injected_libraries": [
-                {
-                    "path": "/data/data/%s/plugin/libdobby.so" % package_name
-                },
+#                {
+#                    "path": "/data/data/%s/plugin/libdobby.so" % package_name
+#                },
                 {
                     "path": "/data/data/%s/plugin/libplugin.so" % package_name
                 }
@@ -72,7 +72,7 @@ def get_package_name():
   #package_name = 'com.coolapk.market'                       # 酷安           网易易盾++
   #package_name = 'com.tmri.app.main'                        # 安管12123      网易易盾--
   #package_name = 'com.sgcc.wsgw.cn'                         # 网上国网       娜迦加固++
-  #package_name = 'com.xiyou.english'                        # XIYOU英语      360加固++
+  package_name = 'com.xiyou.english'                        # XIYOU英语      360加固++
   #package_name = 'abc.cookie.udex'
   #package_name = 'abc.cookie.plugin'
   return package_name

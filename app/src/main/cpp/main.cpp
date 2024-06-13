@@ -13,7 +13,7 @@
 #include "runtime/dex_file.h"
 #include "runtime/art_method.h"
 #include "runtime/dex_file_structs.h"
-#include "Dobby/include/dobby.h"
+#include "Dobby/dobby.h"
 #include "base/file_utils.h"
 #include "base/utils.h"
 #include "base/scoped_fake_dlopen.h"
@@ -141,7 +141,7 @@ void new_art_ArtMethod_Invoke(void *thiz, void *thread, uint32_t *args, uint32_t
 void hook_ArtMethod_Invoke() {
     const char *libart_name = "/apex/com.android.art/lib64/libart.so";
     void * func_addr = (void *) DobbySymbolResolver(libart_name, "_ZN3art9ArtMethod6InvokeEPNS_6ThreadEPjjPNS_6JValueEPKc");
-    DobbyHook(func_addr, (void *)&new_art_ArtMethod_Invoke, (void **)&orig_art_ArtMethod_Invoke);
+    DobbyHook(func_addr, (dobby_dummy_func_t)&new_art_ArtMethod_Invoke, (dobby_dummy_func_t *)&orig_art_ArtMethod_Invoke);
 }
 
 extern "C" typedef int (*fun_art_interpreter_EnterInterpreterFromInvoke)(void *, void *, uint32_t *, uint32_t *, int64_t *, int);
@@ -159,7 +159,7 @@ int new_art_interpreter_EnterInterpreterFromInvoke(void * thread, void * method,
 void hook_art_interpreter_EnterInterpreterFromInvoke() {
     const char *libart_name = "/apex/com.android.art/lib64/libart.so";
     void * func_addr = (void *) DobbySymbolResolver(libart_name, "_ZN3art11interpreter26EnterInterpreterFromInvokeEPNS_6ThreadEPNS_9ArtMethodENS_6ObjPtrINS_6mirror6ObjectEEEPjPNS_6JValueEb");
-    DobbyHook(func_addr, (void *)&new_art_interpreter_EnterInterpreterFromInvoke, (void **)&orig_art_interpreter_EnterInterpreterFromInvoke);
+    DobbyHook(func_addr, (dobby_dummy_func_t)&new_art_interpreter_EnterInterpreterFromInvoke, (dobby_dummy_func_t *)&orig_art_interpreter_EnterInterpreterFromInvoke);
 }
 
 static bool has_injected = false;

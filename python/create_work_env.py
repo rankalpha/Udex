@@ -22,9 +22,9 @@ def push_dump_config(device, package_name, dump_config):
   assert_ret(device.shell('su -c cp /data/local/tmp/plugin/dump.json /data/data/%s/plugin/dump.json' % package_name))
 
 def push_dobby_loader(device, package_name):
-  assert_ret(device.sync.push('../app/build/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out/lib/arm64-v8a/libdobby.so',  '/data/local/tmp/plugin/libdobby.so'))
+  #assert_ret(device.sync.push('../app/build/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out/lib/arm64-v8a/libdobby.so',  '/data/local/tmp/plugin/libdobby.so'))
   assert_ret(device.sync.push('../app/build/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out/lib/arm64-v8a/libplugin.so', '/data/local/tmp/plugin/libplugin.so'))
-  assert_ret(device.shell('su -c cp /data/local/tmp/plugin/libdobby.so  /data/data/%s/plugin/libdobby.so' % package_name))
+  #assert_ret(device.shell('su -c cp /data/local/tmp/plugin/libdobby.so  /data/data/%s/plugin/libdobby.so' % package_name))
   assert_ret(device.shell('su -c cp /data/local/tmp/plugin/libplugin.so /data/data/%s/plugin/libplugin.so' % package_name))
 
 def push_dump_injection(device, package_name):
@@ -58,7 +58,7 @@ def prepare_workenv(package_name, frida_config, dump_config):
   create_dump_directory(device, package_name)
 
 def remove_dobby_loader(device, package_name):
-  assert_ret(device.shell('su -c rm /data/data/%s/plugin/libdobby.so' % package_name))
+  #assert_ret(device.shell('su -c rm /data/data/%s/plugin/libdobby.so' % package_name))
   assert_ret(device.shell('su -c rm /data/data/%s/plugin/libplugin.so' % package_name))
 
 def remove_dump_injection(device, package_name):
@@ -72,7 +72,7 @@ def remove_dump_directory(device, package_name):
 
 def remove_tmp_files(device):
   assert_ret(device.shell('su -c rm /data/local/tmp/plugin/dump.json'))
-  assert_ret(device.shell('su -c rm /data/local/tmp/plugin/libdobby.so'))
+  #assert_ret(device.shell('su -c rm /data/local/tmp/plugin/libdobby.so'))
   assert_ret(device.shell('su -c rm /data/local/tmp/plugin/libplugin.so'))
   assert_ret(device.shell('su -c rm /data/local/tmp/plugin/udex/libudex.so'))
   assert_ret(device.shell('su -c rm /data/local/tmp/plugin/udex/classes.dex'))
