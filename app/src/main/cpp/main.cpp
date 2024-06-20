@@ -13,7 +13,7 @@
 #include "runtime/dex_file.h"
 #include "runtime/art_method.h"
 #include "runtime/dex_file_structs.h"
-#include "Dobby/dobby.h"
+#include "import/Dobby/dobby.h"
 #include "base/file_utils.h"
 #include "base/utils.h"
 #include "base/scoped_fake_dlopen.h"

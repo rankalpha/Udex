@@ -4,16 +4,22 @@ plugins {
 
 android {
     namespace = "abc.cookie.udex"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "abc.cookie.udex"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
         multiDexEnabled = false
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        externalNativeBuild {
+            cmake {
+                abiFilters ("arm64-v8a")
+            }
+        }
     }
 
     buildTypes {

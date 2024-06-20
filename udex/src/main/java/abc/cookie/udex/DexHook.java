@@ -171,6 +171,7 @@ public class DexHook {
             FileReader reader = new FileReader(jsonfile);
             JsonObject root = Json.parse(reader).asObject();
             config.isEnabled = root.get("isEnabled").asBoolean();
+            config.isUseGumJs = root.get("isUseGumJs").asBoolean();
             config.isDumpDex = root.get("isDumpDex").asBoolean();
             config.isDumpCode = root.get("isDumpCode").asBoolean();
             config.isDumpCodeByClassList = root.get("isDumpCodeByClassList").asBoolean();
@@ -197,19 +198,24 @@ public class DexHook {
         Log.d(TAG, "startDumpTask enter");
         String sourceDir = "/data/data/" + packageName;
 
-        if (config.isDumpDex) {
-            Log.d(TAG, "dumpdexToLocal enter");
-            dumpDexToLocal(sourceDir);
-            Log.d(TAG, "dumpdexToLocal leave");
-        }
-        if (config.isDumpCode) {
-            Log.d(TAG, "dumpDexMethods enter");
-            dumpDexMethods(sourceDir);
-            Log.d(TAG, "dumpDexMethods leave");
-        } else if (config.isDumpCodeByClassList) {
-            Log.d(TAG, "dumpClassMethods enter");
-            dumpClassMethods(sourceDir, config.classList);
-            Log.d(TAG, "dumpClassMethods leave");
+        if (config.isUseGumJs) {
+            String jsPath = sourceDir + "/plugin/gumjs/main.js";
+            loadJS(jsPath);
+        } else {
+            if (config.isDumpDex) {
+                Log.d(TAG, "dumpdexToLocal enter");
+                dumpDexToLocal(sourceDir);
+                Log.d(TAG, "dumpdexToLocal leave");
+            }
+            if (config.isDumpCode) {
+                Log.d(TAG, "dumpDexMethods enter");
+                dumpDexMethods(sourceDir);
+                Log.d(TAG, "dumpDexMethods leave");
+            } else if (config.isDumpCodeByClassList) {
+                Log.d(TAG, "dumpClassMethods enter");
+                dumpClassMethods(sourceDir, config.classList);
+                Log.d(TAG, "dumpClassMethods leave");
+            }
         }
         Log.d(TAG, "startDumpTask leave");
     }
@@ -269,7 +275,9 @@ public class DexHook {
             Log.d(TAG, String.format("dumpPackage leave: %s", packageName));
         }
     }
-    public static native void InitRuntime();
+
+    public static native boolean loadJS(String jspath);
+    //public static native void InitRuntime();
     public static native String getPackageName();
     public static native List<byte[]> dumpDexBuffListByCookie(long[] cookie);
     public static native void dumpDexToLocalByCookie(long[] cookie,String dumpDir);

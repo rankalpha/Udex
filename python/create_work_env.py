@@ -11,7 +11,7 @@ def push_frida_config(device, frida_config):
 
 def clear_frida_config(device):
   assert_ret(device.shell('su -c rm /data/local/tmp/frisk/config.json'))
-  
+
 def push_dump_config(device, package_name, dump_config):
   write_file('output/dump.json', 'w', dump_config)
   assert_ret(device.shell('su -c mkdir /data/local/tmp/plugin'))
@@ -20,6 +20,14 @@ def push_dump_config(device, package_name, dump_config):
   assert_ret(device.shell('su -c mkdir /data/data/%s/plugin' % package_name))
   assert_ret(device.shell('su -c chmod a+w /data/data/%s/plugin' % package_name))  
   assert_ret(device.shell('su -c cp /data/local/tmp/plugin/dump.json /data/data/%s/plugin/dump.json' % package_name))
+
+def copy_gumjs_file(device, package_name):
+  assert_ret(device.shell('su -c mkdir /data/local/tmp/plugin/gumjs'))
+  assert_ret(device.shell('su -c mkdir /data/data/%s/plugin/gumjs' % package_name))
+  assert_ret(device.shell('su -c chmod a+w /data/local/tmp/plugin/gumjs'))
+  assert_ret(device.shell('su -c chmod a+w /data/data/%s/plugin/gumjs' % package_name))
+  assert_ret(device.sync.push('output/main.js', '/data/local/tmp/plugin/gumjs/main.js'))
+  assert_ret(device.shell('su -c cp /data/local/tmp/plugin/gumjs/main.js /data/data/%s/plugin/gumjs/main.js' % package_name))
 
 def push_dobby_loader(device, package_name):
   #assert_ret(device.sync.push('../app/build/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out/lib/arm64-v8a/libdobby.so',  '/data/local/tmp/plugin/libdobby.so'))
@@ -53,6 +61,7 @@ def prepare_workenv(package_name, frida_config, dump_config):
   else:
     push_frida_config(device, frida_config)
   push_dump_config(device, package_name, dump_config)
+  copy_gumjs_file(device, package_name)
   push_dobby_loader(device, package_name)
   push_dump_injection(device, package_name)
   create_dump_directory(device, package_name)

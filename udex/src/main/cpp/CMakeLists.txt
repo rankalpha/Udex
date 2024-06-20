@@ -13,6 +13,9 @@ project("udex")
 
 include_directories(./)
 
+add_library(gumjs STATIC IMPORTED)
+set_target_properties(gumjs PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/import/gumjs/libfrida-gumjs.a)
+
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds them for you.
@@ -33,6 +36,7 @@ add_library(${CMAKE_PROJECT_NAME} SHARED
         base/utils.cpp
         dlfcn/fake_dlfcn.c
         jni/jni_help.cpp
+        gumjs_hook.cpp
         art_method.cpp
         dump_dex.cpp
         elf_symbol_resolver.cpp
@@ -46,4 +50,5 @@ add_library(${CMAKE_PROJECT_NAME} SHARED
 target_link_libraries(${CMAKE_PROJECT_NAME}
         # List libraries link to the target library
         android
+        gumjs
         log)
