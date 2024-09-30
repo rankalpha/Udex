@@ -7,7 +7,10 @@ def get_abs_path(path):
 
 def push_frida_config(device, frida_config):
   write_file('output/config.json', 'w', frida_config)
-  assert_ret(device.sync.push('output/config.json', '/data/local/tmp/frisk/config.json'))
+  assert_ret(device.shell('su -c mkdir /data/local/tmp/frisk'))
+  assert_ret(device.shell('su -c chmod a+w /data/local/tmp/frisk'))
+  assert_ret(device.sync.push('output/config.json', '/data/local/tmp/config.json'))
+  assert_ret(device.shell('su -c mv /data/local/tmp/config.json /data/local/tmp/frisk/config.json'))
 
 def clear_frida_config(device):
   assert_ret(device.shell('su -c rm /data/local/tmp/frisk/config.json'))

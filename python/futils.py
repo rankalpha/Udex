@@ -19,7 +19,7 @@ def assert_ret(ret):
 def create_dump_config():
   config = {
     'isEnabled'  : True,
-    'isUseGumJs' : True,
+    'isUseGumJs' : False,
     'isDumpDex'  : True,
     'isDumpCode' : True,
     'isDumpCodeByClassList': False,
@@ -34,7 +34,7 @@ def create_frida_config(package_name):
         {
             "app_name" : "%s" % package_name,
             "enabled": True,
-            "start_up_delay_ms": 10000,
+            "start_up_delay_ms": 5000,
             "injected_libraries": [
 #                {
 #                    "path": "/data/data/%s/plugin/libdobby.so" % package_name
@@ -66,7 +66,7 @@ def get_package_name():
   #package_name = 'com.cib.cibmb'                            # 兴业银行       爱加密企业版--
   #package_name = 'com.cib.xyk'                              # 兴业生活       爱加密企业版--
   #package_name = 'com.cib.xykb'                             # 兴业生活商户版 爱加密企业版
-  #package_name = 'com.ct.client'                            # 中国电信       爱加密企业版+?
+  package_name = 'com.ct.client'                            # 中国电信       爱加密企业版+?
   #package_name = 'com.chinatelecom.bestpayclient'           # 翼支付         爱加密企业版--
   #package_name = 'com.greenpoint.android.mc10086.activity'  # 中国移动       爱加密企业版++
   #package_name = 'com.webank.wemoney'                       # 微众银行       腾讯御安全++
@@ -76,4 +76,5 @@ def get_package_name():
   #package_name = 'com.xiyou.english'                        # XIYOU英语      360加固++
   #package_name = 'abc.cookie.udex'
   #package_name = 'abc.cookie.plugin'
+  #package_name = 'mark.via'
   return package_name

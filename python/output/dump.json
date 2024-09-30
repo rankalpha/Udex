@@ -1,6 +1,6 @@
 {
   "isEnabled": true,
-  "isUseGumJs": true,
+  "isUseGumJs": false,
   "isDumpDex": true,
   "isDumpCode": true,
   "isDumpCodeByClassList": false,

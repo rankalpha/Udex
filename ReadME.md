@@ -20,10 +20,20 @@
 ### 2024/06/20
 ### 添加 frida-gumjs 来方便运行 js 代码
 
+### 2024/09/30
+### 更新到 Matrixx 系统。
+### 最近才发现 EvolutionX 系统在 SourceForge 的仓库已经删除，并且 EvolutionX 系统宣布不再支持 RedNote7 ，因此就有了更换一个安卓系统的想法。
+### 经过测试发现 Matrixx 系统还不错，基于 crDroid 系统，自带 KernelSU ，目前最新的安卓版本为 Android 14.0.0 r62。
+### Matrixx 官方主页：https://github.com/ProjectMatrixx
+### Matrixx 的 ROM 可以在 SourceForge 下载：https://sourceforge.net/projects/vitor-unofficial-builds/files/Project%20Matrix/
+### 以前的 EvolutionX 系统也最终找到一处下载地址：https://sourceforge.net/projects/evolution-x/files/previously_supported_devices/lavender/14/
+### 经过测试发现本程序无法直接在 Matrixx 系统下使用，经过调试发现原来是 EvolutionX 系统（android 14.0.0 r25）版本使用的一个小技巧来获取 ArtMethod 类的 GetCodeItem 的方法已经在 Matrixx 系统下失效了。
+### 本来以为要大费周章才能找到新的解决方案，哪知道踏破铁鞋无觅处，得来全不费工夫，Matrixx 系统（android 14.0.0 r62）中导出了 art::ArtMethod::GetCodeItem 符号
+### 这样就很容易修正这个问题了。经过测试在 EvolutionX 和 Matrixx 系统下，都能成功 dump dex 了。
+
 # 使用环境：
-### 1、手机安装 EvolutionX 的 android 14 系统，对应的安卓版本为 android-14.0r25。
-### 2、安装 KernelSU 
-### 3、在 KernelSU 中安装 ZygiskNext (https://github.com/Dr-TSNG/ZygiskNext/tree/master) 以及自己修改过的 ZygiskFrida (https://github.com/rankalpha/ZygiskFrida) ，可选择安装 Shamiko。
+### 1、手机安装 Matrixx 的 android 14 系统，对应的安卓版本为 android-14.0.0r62。（因为 Matrixx 系统自带了 KernelSU ，因此不需要再单独安装 KernelSU）
+### 2、在 KernelSU 中安装 ZygiskNext (https://github.com/Dr-TSNG/ZygiskNext/tree/master) 以及自己修改过的 ZygiskFrida (https://github.com/rankalpha/ZygiskFrida) ，可选择安装 Shamiko。
 
 # 使用方法一：
 ### 1、修改 python 目录下的 futils.py 文件中的 package_name 为你需要 dump 的包名，并保存
