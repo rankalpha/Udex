@@ -11,12 +11,14 @@ __attribute__((constructor)) static void init() {
     LOGV("init leave");
 }
 
+/***
 extern "C" JNIEXPORT void JNICALL
 Java_abc_cookie_udex_DexHook_InitRuntime(
         JNIEnv* env,
         jclass clazz) {
     runtime::InitRuntime();
 }
+/***/
 
 extern "C" JNIEXPORT jstring JNICALL
 Java_abc_cookie_udex_DexHook_getPackageName(

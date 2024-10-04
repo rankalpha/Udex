@@ -1,12 +1,12 @@
 {
   "targets": [
     {
-      "app_name": "com.xiyou.english",
+      "app_name": "cn.gov.pbc.dcep",
       "enabled": true,
       "start_up_delay_ms": 10000,
       "injected_libraries": [
         {
-          "path": "/data/data/com.xiyou.english/plugin/libplugin.so"
+          "path": "/data/data/cn.gov.pbc.dcep/plugin/libplugin.so"
         }
       ]
     }

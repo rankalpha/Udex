@@ -33,7 +33,7 @@ endif()
 
 add_library(Dobby STATIC IMPORTED)
 set_target_properties(Dobby PROPERTIES IMPORTED_LOCATION
-        ${CMAKE_CURRENT_SOURCE_DIR}/Dobby/${CMAKE_ANDROID_ARCH_ABI}/libdobby.a)
+        ${CMAKE_CURRENT_SOURCE_DIR}/import/Dobby/${CMAKE_ANDROID_ARCH_ABI}/libdobby.a)
 
 
 add_library(${CMAKE_PROJECT_NAME} SHARED

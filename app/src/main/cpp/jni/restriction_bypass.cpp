@@ -6,7 +6,7 @@
 #include "../base/scoped_fake_dlopen.h"
 #include "../dlfcn/fake_dlfcn.h"
 #include "../bypass_dl/bypass_dlopen.h"
-#include "../Dobby/dobby.h"
+#include "../import/Dobby/dobby.h"
 #include "../util.h"
 
 namespace jni {
