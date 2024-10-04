@@ -1,12 +1,12 @@
 {
   "targets": [
     {
-      "app_name": "cn.gov.pbc.dcep",
+      "app_name": "com.ct.client",
       "enabled": true,
-      "start_up_delay_ms": 10000,
+      "start_up_delay_ms": 5000,
       "injected_libraries": [
         {
-          "path": "/data/data/cn.gov.pbc.dcep/plugin/libplugin.so"
+          "path": "/data/data/com.ct.client/plugin/libplugin.so"
         }
       ]
     }

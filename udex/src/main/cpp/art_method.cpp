@@ -17,6 +17,22 @@ DexFile * ArtMethod::GetDexFile(void *artMethod) {
 }
 
 void * ArtMethod::GetCodeItem(void * artMethod) {
+    if (runtime::ArtMethod_GetCodeItem != nullptr) {
+        return ArtMethod::GetCodeItem1(artMethod);
+    } else if (runtime::NterpGetCodeItem != nullptr) {
+        return ArtMethod::GetCodeItem2(artMethod);
+    } else {
+        LOGV("Please check android version! GetCodeItem and NterpGetCodeItem is invalid ptr!");
+        return nullptr;
+    }
+}
+
+void * ArtMethod::GetCodeItem1(void * artMethod) {
+    void * code_item = ((runtime::fun_art_ArtMethod_GetCodeItem)runtime::ArtMethod_GetCodeItem)(artMethod);
+    return code_item;
+}
+
+void * ArtMethod::GetCodeItem2(void * artMethod) {
     uint32_t * p1 = (uint32_t *)artMethod;
     uint32_t v1 = p1[1];
     uint32_t v2 = p1[2];

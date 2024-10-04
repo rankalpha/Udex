@@ -20,6 +20,9 @@ class ArtMethod {
 public:
     static DexFile * GetDexFile(void * artMethod);
     static void * GetCodeItem(void * artMethod);
+    static void * GetCodeItem1(void * artMethod);
+    static void * GetCodeItem2(void * artMethod);
+
     uint32_t GetAccessFlags() const { return access_flags_; }
     bool IsNative() const {
         return IsNative(GetAccessFlags());
